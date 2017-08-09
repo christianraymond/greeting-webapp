@@ -1,0 +1,91 @@
+body {
+    background-color: dodgerblue;
+
+}
+
+.container{
+    background-color: white;
+    width : 80%;
+    margin : auto;
+    padding : 1em;
+    font-family: "Arial"
+}
+
+.error {
+    color : red;
+}
+
+.success {
+    color : lightgreen;
+}
+
+.header {
+    display: inline;
+}
+
+label {
+    font-weight: bold;
+    width : 10em;
+    display: inline-block;
+
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+select
+{
+    padding : 0.5em;
+    border : solid grey 0.05em;
+}
+
+input[type='submit']{
+    margin : 0.5em;
+}
+
+.menu {
+    margin-bottom: 1em;
+    display: inline;
+}
+
+.menu ul {
+    list-style: none;
+    display: inline;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu li {
+    display: inline-block;
+    width : 7em;
+    text-align: center;
+}
+
+.menu li a {
+    display : block;
+    background-color: dodgerblue;
+    padding : 1em;
+}
+
+.menu li a:hover {
+    background-color: lightgrey;
+}
+
+.field{
+    margin : 0.5em;
+}
+
+.search{
+    margin-top: 5em;
+}
+
+.search input[type="text"] {
+    width: 20em;
+}
+
+.search input[type="submit"] {
+    width: 10em;
+    padding : 0.5em;
+}
