@@ -1,8 +1,15 @@
 <div class="page-header">
-   <h4>Welcome to greeting exercice</h4>
- </div>
+  <h5>Welcome to greeting exercice</h5>
+</div>
 
- <form class="" action="greeted" method="post">
-     <input type="text" name="" placeholder="Type name here">
-     <input type="submit" name="" value="name">
- </form>
+<form class="" action="greeted" method="post">
+  <input type="text" name="name" placeholder="Type name here">
+  <input type="submit" name="" value="Greet">
+
+  <div class="languagediv">
+    <input type="radio" name="language" value="english">English
+    <input type="radio" name="language" value="french">French
+    <input type="radio" name="language" value="isixhosa">Isixhosa
+  </div>
+</form>
+<h1>{{greetedName}}</h1>
