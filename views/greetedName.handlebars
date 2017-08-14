@@ -1,3 +1,6 @@
 <div class="page-header">
-   <h3>Here i need to see all greeted names!</h3>
- </div>
+  <h3>See the list of name greeted below.</h3>
+</div>
+{{#each list}}
+  <li>{{@key}} {{this}}</li>
+{{/each}}

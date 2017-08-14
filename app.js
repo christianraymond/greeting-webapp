@@ -1,26 +1,20 @@
 const express = require('express');
 const app = express();
-// app.disable('x-powered-by');
+var nameObj = {};
+
 const handlebars = require('express-handlebars').create({
   defaultLayout: 'main'
 });
 const bodyParser = require('body-parser');
-// const greetedNameRoutes = require('greetedName');
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-
-app.use(express.static('public'));
-
-// parse application/x-www-form-urlencoded
 
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 //MORE IMPORTS HERE
 app.set('port', process.env.PORT || 3000);
-
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
   res.render('home');
@@ -34,33 +28,50 @@ app.get('/contact', function(req, res) {
   res.render('contact');
 });
 
-app.get('/greetedName', function(req, res){
-  res.render('greetedName')
-})
-// app.post('/greeted/name', greetingRoutes.name);
+app.get('/greetedName', function(req, res) {
+  console.log(nameObj);
+  res.render('greetedName', {
+    list: nameObj
+  });
+});
 
 app.listen(app.get('port'), function() {
   console.log("App runnning on http://localhost:" + app.get('port'));
 });
 
+var storeAllNames = [];
+
 app.post('/greeted', function(req, res) {
   var name = req.body.name;
   var language = req.body.language;
-  console.log(name);
 
+  if (nameObj[name] === undefined) {
+    nameObj[name] = 0;
+  }
+  nameObj[name] += 1;
+
+  storeAllNames.push(name);
+  for (var n = 0; n < storeAllNames.length; n++) {}
+  console.log(storeAllNames);
   if (language === 'isixhosa') {
-    var greetedName = 'Molo ' + name;
+    var langName = 'Molo ' + name;
   }
   if (language === 'french') {
-    var greetedName = 'Bonjour ' + name;
+    var langName = 'Bonjour ' + name;
   };
   if (language === 'english') {
-    var greetedName = 'Hello ' + name;
+    var langName = 'Hello ' + name;
   };
 
-
-var data = {
-  greetedName: greetedName,
-}
-res.render('home', data);
+  var data = {
+    langName: langName,
+    nameObj: nameObj,
+  }
+  res.render('home', {
+    data: data.langName
+  });
+  // res.render('greetedName', {data: data.nameObj})
+  return {
+    data
+  }
 });
