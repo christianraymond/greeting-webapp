@@ -39,24 +39,25 @@ var storeAllNames = [];
 
 app.post('/greeted', function(req, res) {
   var name = req.body.name;
+  var name1 = name.charAt(0).toUpperCase() + name.slice(1)
   var language = req.body.language;
 
-  if (nameObj[name] === undefined) {
-    nameObj[name] = 0;
+  if (nameObj[name1] === undefined) {
+    nameObj[name1] = 0;
   }
-  nameObj[name] += 1;
+  nameObj[name1] += 1;
 
-  storeAllNames.push(name);
+  storeAllNames.push(name1);
   for (var n = 0; n < storeAllNames.length; n++)
   console.log(storeAllNames);
   if (language === 'isixhosa') {
-    var langName = 'Molo ' + name + '.';
+    var langName = 'Molo ' + name1 + '.';
   }
   if (language === 'french') {
-    var langName = 'Bonjour ' + name + '.';
+    var langName = 'Bonjour ' + name1 +'.';
   };
   if (language === 'english') {
-    var langName = 'Hello ' + name + '.';
+    var langName = 'Hello ' + name1 + '.';
   };
 
   var data = {
