@@ -1,18 +1,29 @@
 {
   "name": "greeting-webapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Learning expressJS",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "keywords": [],
-  "author": "",
+  "author": "chrisNgu",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.0.10"
-  }
+    "handlebars": "^4.0.10",
+    "heroku": "^0.2.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianraymond/greeting-webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/christianraymond/greeting-webapp/issues"
+  },
+  "homepage": "https://github.com/christianraymond/greeting-webapp#readme"
 }

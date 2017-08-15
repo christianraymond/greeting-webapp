@@ -24,10 +24,6 @@ app.get('/about', function(req, res) {
   res.render('about');
 });
 
-app.get('/contact', function(req, res) {
-  res.render('contact');
-});
-
 app.get('/greetedName', function(req, res) {
   console.log(nameObj);
   res.render('greetedName', {
@@ -51,16 +47,16 @@ app.post('/greeted', function(req, res) {
   nameObj[name] += 1;
 
   storeAllNames.push(name);
-  for (var n = 0; n < storeAllNames.length; n++) {}
+  for (var n = 0; n < storeAllNames.length; n++)
   console.log(storeAllNames);
   if (language === 'isixhosa') {
-    var langName = 'Molo ' + name;
+    var langName = 'Molo ' + name + '.';
   }
   if (language === 'french') {
-    var langName = 'Bonjour ' + name;
+    var langName = 'Bonjour ' + name + '.';
   };
   if (language === 'english') {
-    var langName = 'Hello ' + name;
+    var langName = 'Hello ' + name + '.';
   };
 
   var data = {
@@ -70,7 +66,7 @@ app.post('/greeted', function(req, res) {
   res.render('home', {
     data: data.langName
   });
-  // res.render('greetedName', {data: data.nameObj})
+  // res.r
   return {
     data
   }
