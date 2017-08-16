@@ -7,6 +7,9 @@
     "start": "node app.js",
     "test": "mocha"
   },
+  "engine":{
+    "node": "8.3.0"
+  },
   "keywords": [],
   "author": "chrisNgu",
   "license": "ISC",

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-var nameObj = {};
+var counter = {};
 
 const handlebars = require('express-handlebars').create({
   defaultLayout: 'main'
@@ -25,9 +25,9 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/greetedName', function(req, res) {
-  console.log(nameObj);
+  console.log(counter);
   res.render('greetedName', {
-    list: nameObj
+    counter: counter
   });
 });
 
@@ -42,27 +42,27 @@ app.post('/greeted', function(req, res) {
   var name1 = name.charAt(0).toUpperCase() + name.slice(1)
   var language = req.body.language;
 
-  if (nameObj[name1] === undefined) {
-    nameObj[name1] = 0;
+  if (counter[name1] === undefined) {
+    counter[name1] = 0;
   }
-  nameObj[name1] += 1;
+  counter[name1] += 1;
 
   storeAllNames.push(name1);
   for (var n = 0; n < storeAllNames.length; n++)
   console.log(storeAllNames);
   if (language === 'isixhosa') {
-    var langName = 'Molo ' + name1 + '.';
+    var langName = 'Molo ' + name1 + '!';
   }
   if (language === 'french') {
-    var langName = 'Bonjour ' + name1 +'.';
+    var langName = 'Bonjour ' + name1 +'!';
   };
   if (language === 'english') {
-    var langName = 'Hello ' + name1 + '.';
+    var langName = 'Hello ' + name1 + '!';
   };
 
   var data = {
     langName: langName,
-    nameObj: nameObj,
+    counter: counter,
   }
   res.render('home', {
     data: data.langName
