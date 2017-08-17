@@ -2,12 +2,12 @@
   "name": "greeting-webapp",
   "version": "1.0.0",
   "description": "Learning expressJS",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node app.js",
     "test": "mocha"
   },
-  "engine":{
+  "engine": {
     "node": "8.3.0"
   },
   "keywords": [],
@@ -18,7 +18,8 @@
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
-    "heroku": "^0.2.0"
+    "heroku": "^0.2.0",
+    "mongodb": "^2.2.31"
   },
   "devDependencies": {},
   "repository": {
