@@ -1,7 +1,4 @@
 const models = require('./models');
-const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greeting-webapplication";
-const mongoose = require('mongoose');
-models(mongoURL);
 
 const express = require('express');
 const app = express();
@@ -48,6 +45,20 @@ app.post('/greeted', function(req, res) {
   var name1 = name.charAt(0).toUpperCase() + name.slice(1)
   var language = req.body.language;
 
+  //creating the schema document.
+  var person = new models({
+    name: name1,
+    counter: 1
+  });
+
+  person.save(function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Names saved successfully!');
+    }
+  });
+
   if (counter[name1] === undefined) {
     counter[name1] = 0;
   }
@@ -73,8 +84,8 @@ app.post('/greeted', function(req, res) {
   res.render('home', {
     data: data.langName
   });
-  // res.r
   return {
     data
   }
+  console.log(person.name + person.counter);
 });

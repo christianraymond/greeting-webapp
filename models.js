@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
-module.exports = function(mongoURL) {
-    mongoose.connect(mongoURL);
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greeting-webapplication";
 
-    const greetSchema = mongoose.Schema({
-      name: String,
-      counter: Number
-    });
+mongoose.connect(mongoURL, {
+  useMongoClient: true
+}, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('database ready to be used!');
+  }
+});
 
-    const greet = mongoose.model('greet', greetSchema);
-    return {
-      greet
-    };
-}
+const greetSchema = mongoose.Schema({
+  name: String,
+  counter: Number
+});
+//compile my model.
+const greet = mongoose.model('greet', greetSchema);
+
+module.exports = greet;
