@@ -1,8 +1,6 @@
-const models = require('models');
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/greeting-webapplication'";
+const models = require('./models');
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greeting-webapplication";
 const mongoose = require('mongoose');
-
-mongoose.connect(mongoURL);
 
 const express = require('express');
 const app = express();
