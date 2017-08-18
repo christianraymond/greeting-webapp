@@ -7,7 +7,7 @@ module.exports = function(mongoURL) {
       counter: Number
     });
 
-    const greet = mongoose.models('greet', greetSchema);
+    const greet = mongoose.model('greet', greetSchema);
     return {
       greet
     };
