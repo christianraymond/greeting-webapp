@@ -1,5 +1,6 @@
 const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
 const mongoose = require('mongoose');
+
 mongoose.connect(mongoURL);
 
 const express = require('express');
