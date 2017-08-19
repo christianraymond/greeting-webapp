@@ -1,8 +1,13 @@
-const models = require('./models');
+const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+const mongoose = require('mongoose');
+mongoose.connect(mongoURL);
+
+var storeAllNames = [];
+var counter = {};
+var name1;
 
 const express = require('express');
 const app = express();
-var counter = {};
 
 const handlebars = require('express-handlebars').create({
   defaultLayout: 'main'
@@ -15,7 +20,6 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
 //MORE IMPORTS HERE
 app.set('port', process.env.PORT || 3000);
 
@@ -28,36 +32,23 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/greetedName', function(req, res) {
-  console.log(counter);
+  console.log(name1);
   res.render('greetedName', {
+    storeAllNames: storeAllNames
+  });
+});
+
+app.get('/counter', function(req, res) {
+  console.log(counter);
+  res.render('counter', {
     counter: counter
   });
 });
 
-app.listen(app.get('port'), function() {
-  console.log("App runnning on http://localhost:" + app.get('port'));
-});
-
-var storeAllNames = [];
-
 app.post('/greeted', function(req, res) {
   var name = req.body.name;
-  var name1 = name.charAt(0).toUpperCase() + name.slice(1)
+   name1 = name.charAt(0).toUpperCase() + name.slice(1)
   var language = req.body.language;
-
-  //creating the schema document.
-  var person = new models({
-    name: name1,
-    counter: 1
-  });
-
-  person.save(function(err) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Names saved successfully!');
-    }
-  });
 
   if (counter[name1] === undefined) {
     counter[name1] = 0;
@@ -65,8 +56,10 @@ app.post('/greeted', function(req, res) {
   counter[name1] += 1;
 
   storeAllNames.push(name1);
+
   for (var n = 0; n < storeAllNames.length; n++)
     console.log(storeAllNames);
+
   if (language === 'isixhosa') {
     var langName = 'Molo ' + name1 + '!';
   }
@@ -80,12 +73,16 @@ app.post('/greeted', function(req, res) {
   var data = {
     langName: langName,
     counter: counter,
+    name1: name1
   }
   res.render('home', {
     data: data.langName
   });
+  // res.r
   return {
     data
   }
-  console.log(person.name + person.counter);
+});
+app.listen(app.get('port'), function() {
+  console.log("App runnning on http://localhost:" + app.get('port'));
 });
