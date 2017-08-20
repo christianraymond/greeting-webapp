@@ -2,16 +2,17 @@ const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
 const mongoose = require('mongoose');
 mongoose.connect(mongoURL);
 
-var storeAllNames = [];
+var storeAllNames = {};
+var namesArr = [];
 var counter = {};
 var name1;
 
 const express = require('express');
 const app = express();
-
 const handlebars = require('express-handlebars').create({
   defaultLayout: 'main'
 });
+
 const bodyParser = require('body-parser');
 
 app.engine('handlebars', handlebars.engine);
@@ -32,14 +33,12 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/greetedName', function(req, res) {
-  console.log(name1);
   res.render('greetedName', {
-    storeAllNames: storeAllNames
+    storeAllNames: namesArr
   });
 });
 
 app.get('/counter', function(req, res) {
-  console.log(counter);
   res.render('counter', {
     counter: counter
   });
@@ -47,21 +46,26 @@ app.get('/counter', function(req, res) {
 
 app.post('/greeted', function(req, res) {
   var name = req.body.name;
-   name1 = name.charAt(0).toUpperCase() + name.slice(1)
+  name1 = name.charAt(0).toUpperCase() + name.slice(1)
   var language = req.body.language;
 
+  //Check if the same name already exists and avoid deplications.
+  if (storeAllNames[name1] == undefined) {
+    namesArr.push(name1);
+    storeAllNames[name1] = 1
+  } else {
+    storeAllNames[name1] += 1;
+  }
+  
+  //Allow the counter to increament everytime a new name is created.
   if (counter[name1] === undefined) {
     counter[name1] = 0;
   }
   counter[name1] += 1;
 
-  storeAllNames.push(name1);
-
-  for (var n = 0; n < storeAllNames.length; n++)
-    console.log(storeAllNames);
-
+  //Greet the person by the language of their choice.
   if (language === 'isixhosa') {
-    var langName = 'Molo ' + name1 + '!';
+    var langName = 'Molo ' + name1 + ' !'
   }
   if (language === 'french') {
     var langName = 'Bonjour ' + name1 + '!';
