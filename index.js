@@ -6,6 +6,7 @@ var storeAllNames = {};
 var namesArr = [];
 var counter = {};
 var name1;
+var output = name1 + 'has been greeted ' + counter;
 
 const express = require('express');
 const app = express();
@@ -35,7 +36,7 @@ app.get('/about', function(req, res) {
 app.get('/greetedName', function(req, res) {
   res.render('greetedName', {
     storeAllNames: namesArr
-  });
+  })
 });
 
 app.get('/counter', function(req, res) {
@@ -56,7 +57,7 @@ app.post('/greeted', function(req, res) {
   } else {
     storeAllNames[name1] += 1;
   }
-  
+
   //Allow the counter to increament everytime a new name is created.
   if (counter[name1] === undefined) {
     counter[name1] = 0;
@@ -73,11 +74,18 @@ app.post('/greeted', function(req, res) {
   if (language === 'english') {
     var langName = 'Hello ' + name1 + '!';
   };
+//Route to redirect to how many times names was greeted 
+  app.get('/names/:id', function(req, res){
+    var name = req.params.id;
+    res.render('names', {
+      msg: name + ' was greeted ' + storeAllNames[name] + ' time(s)!'
+    });
+  });
 
   var data = {
     langName: langName,
-    counter: counter,
-    name1: name1
+    name1: name1,
+    counter: output
   }
   res.render('home', {
     data: data.langName
