@@ -1,4 +1,4 @@
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/test";
 const mongoose = require('mongoose');
 mongoose.connect(mongoURL);
 
@@ -27,6 +27,10 @@ app.set('port', process.env.PORT || 3000);
 
 app.get('/', function(req, res) {
   res.render('home');
+});
+
+app.get('/url', function(req, res) {
+  res.send(MONGO_DB_URL);
 });
 
 app.get('/about', function(req, res) {
@@ -74,7 +78,7 @@ app.post('/greeted', function(req, res) {
   if (language === 'english') {
     var langName = 'Hello ' + name1 + '!';
   };
-//Route to redirect to how many times names was greeted 
+//Route to redirect to how many times names was greeted
   app.get('/names/:id', function(req, res){
     var name = req.params.id;
     res.render('names', {
